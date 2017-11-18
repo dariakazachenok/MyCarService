@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.IO;
 using System.Web;
 
-namespace MyImageRoom.Controllers
+namespace MyCarService.Controllers
 {
     public class ClientController : Controller
     {
