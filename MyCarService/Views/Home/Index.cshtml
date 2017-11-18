@@ -3,35 +3,68 @@
     ViewBag.Title = "Home page";
 }
 
-<div>@Html.ActionLink("Create Client", "CreateClient", "Client")</div>
+<div class="jumbotron row">
+    <div class="col-md-4">
+        <div>@Html.ActionLink("Create Client", "CreateClient", "Client")</div>
+    </div>
+    <div class="col-md-8">
+        <img src="/Images/auto.jpg" width="500" height="200" />
+    </div>
+</div>
 
 <div class="grid">
+    <div>
+        Photo
+    </div>
+
+    <div>
+        №
+    </div>
+
+    <div>
+        First Name
+    </div>
+
+    <div>
+        Last Name
+    </div>
+    
+    <div>
+       Edit
+    </div>
+    
+    <div>
+       Delete 
+    </div>
+
+    
+
     @for (int i = 0; i < Model.Clients.Count; i++)
     {
         var item = Model.Clients[i];
+        var displayIndex = i + 1;
+        <div>
+            <img src="@item.Photo" height="50" width="50" />
+        </div>
 
-        <img src="@item.Photo" height="60" width="60"/>
+        <div>
+            @displayIndex
+        </div>
 
         <div>
             @item.FirstName
+        </div>
+
+        <div>
             @item.LastName
         </div>
+                
         <div>
             <a href="/Client/CreateClient/@item.Id">Edit Client</a>
         </div>
         <div>
             <a href="Client/DeleteClient/@item.Id">Delete</a>
         </div>
-    }
-    
+     }
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        
-       
-   
-       
-    </div>
-</div>
