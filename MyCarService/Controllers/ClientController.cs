@@ -1,6 +1,6 @@
-﻿using Models;
+﻿using System;
+using Models;
 using Services;
-using System;
 using System.Web.Mvc;
 using System.IO;
 using System.Web;
@@ -69,7 +69,20 @@ namespace MyCarService.Controllers
                 clientService.CreateClient(client);
             }
 
-            return View("../Home/Index");
+            var clients = clientService.GetAll();
+            var clientsViewModel = new ClientViewModel();
+
+            clients.ForEach(cl =>
+            {
+                var clientModel = new ClientItemViewModel();
+                clientModel.FirstName = cl.FirstName;
+                clientModel.LastName = cl.LastName;
+                clientModel.Id = cl.Id;
+                clientModel.Photo = String.IsNullOrWhiteSpace(cl.Photo) ? null : "/Photo/" + cl.Photo;
+
+                clientsViewModel.Clients.Add(clientModel);
+            });
+            return View("../Home/Index", clientsViewModel);
         }
 
         private static void SaveImageToDirectory(HttpPostedFileBase httpPostedFileBase, string directory)
@@ -82,31 +95,25 @@ namespace MyCarService.Controllers
             }
         }
 
-        public ActionResult ViewClients()
+        public ActionResult DeleteClient(int id)
         {
+            clientService.RemoveClient(id);
+
             var clients = clientService.GetAll();
             var clientsViewModel = new ClientViewModel();
 
-            clients.ForEach(client =>
-           {
-               var clientModel = new ClientItemViewModel();
-               clientModel.FirstName = client.FirstName;
-               clientModel.LastName = client.LastName;
-               clientModel.Id = client.Id;
-               clientModel.Photo = String.IsNullOrWhiteSpace(client.Photo) ? null : "/Photo/" + client.Photo;
+            clients.ForEach(cl =>
+            {
+                var clientModel = new ClientItemViewModel();
+                clientModel.FirstName = cl.FirstName;
+                clientModel.LastName = cl.LastName;
+                clientModel.Id = cl.Id;
+                clientModel.Photo = String.IsNullOrWhiteSpace(cl.Photo) ? null : "/Photo/" + cl.Photo;
 
-               clientsViewModel.Clients.Add(clientModel);
-           });
+                clientsViewModel.Clients.Add(clientModel);
+            });
 
-            return View("ViewClients", clientsViewModel);
-        }
-
-        public ActionResult DeleteClient(int id)
-        {
-            var client = clientService.GetById(id);
-            clientService.RemoveClient(id);
-
-            return RedirectToAction("ViewClients");
+            return View("../Home/Index", clientsViewModel);
         }
     }
 }

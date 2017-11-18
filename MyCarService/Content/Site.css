@@ -25,11 +25,14 @@ textarea {
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: minmax(10px);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows:100px;
+    /* ReSharper disable once CssNotResolved */
     grid-column-gap: 10px;
+    /* ReSharper disable once CssNotResolved */
+    grid-row-gap: 15px;
   
-    background: #564334;
-    color: #F9C941;
+    background: #D3D3D3;
+    color: #000000;
     border-right: 2px solid;
 }

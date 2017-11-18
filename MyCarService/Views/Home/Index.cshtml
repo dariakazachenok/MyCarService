@@ -1,14 +1,37 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model Models.ClientViewModel
+@{
+    ViewBag.Title = "Home page";
 }
 
+<div>@Html.ActionLink("Create Client", "CreateClient", "Client")</div>
+
+<div class="grid">
+    @for (int i = 0; i < Model.Clients.Count; i++)
+    {
+        var item = Model.Clients[i];
+
+        <img src="@item.Photo" height="60" width="60"/>
+
+        <div>
+            @item.FirstName
+            @item.LastName
+        </div>
+        <div>
+            <a href="/Client/CreateClient/@item.Id">Edit Client</a>
+        </div>
+        <div>
+            <a href="Client/DeleteClient/@item.Id">Delete</a>
+        </div>
+    }
+    
+</div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
         
-        <div>@Html.ActionLink("Add Client", "CreateClient", "Client")</div>
-        <div>@Html.ActionLink("View Clients", "ViewClients", "Client")</div>
+       
+   
        
     </div>
 </div>
