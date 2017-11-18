@@ -1,0 +1,73 @@
+﻿@model Models.ClientModel
+@{
+    ViewBag.Title = "Client Details";
+}
+
+<h2>Client Details</h2>
+<form action="@Url.Action("UpdateClient", "Client")" enctype="multipart/form-data" method="POST" class="form-horizontal">
+    
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal"/>
+    <h4>Client</h4>
+    <hr/>
+    @Html.ValidationSummary(true)
+    <div>
+        @Html.HiddenFor(model => model.Id)
+
+
+        @Html.LabelFor(model => model.FirstName, "First Name")
+        <br/>
+
+        @Html.EditorFor(model => model.FirstName)
+        @Html.ValidationMessageFor(model => model.FirstName)
+        <br/>
+
+        @Html.LabelFor(model => model.LastName, "Last Name")
+        <br/>
+
+        @Html.EditorFor(model => model.LastName)
+        @Html.ValidationMessageFor(model => model.LastName)
+        <br/>
+
+        @Html.LabelFor(model => model.DataOfBirth)
+        <br/>
+
+        @Html.EditorFor(model => model.DataOfBirth)
+        @Html.ValidationMessageFor(model => model.DataOfBirth)
+        <br/>
+
+        @Html.LabelFor(model => model.Address, "Address")
+        <br/>
+
+        @Html.EditorFor(model => model.Address)
+        @Html.ValidationMessageFor(model => model.Address)
+        <br/>
+
+        @Html.LabelFor(model => model.Phone, "Phone")
+        <br/>
+
+        @Html.EditorFor(model => model.Phone)
+        @Html.ValidationMessageFor(model => model.Phone)
+        <br/>
+
+        @Html.LabelFor(model => model.Email)
+        <br/>
+
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+        <br/>
+
+        @Html.LabelFor(model => model.Photo)
+        <br/>
+
+        @Html.HiddenFor(model => model.Photo)
+        @Html.ValidationMessageFor(model => model.Photo)
+        <input type="file" name="Photo" value="Browse"/>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+</form>
