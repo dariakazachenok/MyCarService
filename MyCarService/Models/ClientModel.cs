@@ -18,6 +18,7 @@ namespace Models
         [StringLength(50)]
         public string LastName { get; set;}
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         [Display(Name = "Data Of Birth")]
        // [Required(ErrorMessage = "Please enter Data Of Birth ")]
         public DateTime? DataOfBirth { get; set; }

@@ -42,7 +42,25 @@ namespace Services
 
         public Client GetById(int id)
         {
-            return databaseContext.Clients.FirstOrDefault(x =>x.Id == id);
+            return databaseContext.Clients.FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<Client> GetAllClients(string search)
+        {
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                List<Client> spisok = databaseContext.Clients
+                    .ToList();
+                return spisok;
+            }
+            else
+            {
+                List<Client> spisok = databaseContext.Clients
+                    .Where(x => x.LastName.Contains(search) || x.FirstName.Contains(search))
+                    .ToList();
+
+                return spisok;
+            }
         }
     }
 }

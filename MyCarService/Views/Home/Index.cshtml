@@ -12,59 +12,58 @@
     </div>
 </div>
 
-<div class="grid">
-    <div>
-        Photo
-    </div>
-
-    <div>
-        №
-    </div>
-
-    <div>
-        First Name
-    </div>
-
-    <div>
-        Last Name
-    </div>
-    
-    <div>
-       Edit
-    </div>
-    
-    <div>
-       Delete 
-    </div>
-
-    
-
-    @for (int i = 0; i < Model.Clients.Count; i++)
-    {
-        var item = Model.Clients[i];
-        var displayIndex = i + 1;
-        <div>
-            <img src="@item.Photo" height="50" width="50" />
-        </div>
-
-        <div>
-            @displayIndex
-        </div>
-
-        <div>
-            @item.FirstName
-        </div>
-
-        <div>
-            @item.LastName
-        </div>
-                
-        <div>
-            <a href="/Client/CreateClient/@item.Id">Edit Client</a>
-        </div>
-        <div>
-            <a href="Client/DeleteClient/@item.Id">Delete</a>
-        </div>
-     }
+<div class="row">
+    <form action="Index" method="get">
+        @Html.EditorFor(x => x.Search, new { htmlAttributes = new { placeholder = "Enter Last Name" } })
+        <input type="submit" value="Search">
+    </form>
 </div>
 
+<div class="row margin-top-10">
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>№</th>
+            <th>First name</th>
+            <th>Last Name</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @for (int i = 0; i < Model.Clients.Count; i++)
+        {
+            var item = Model.Clients[i];
+            var displayIndex = i + 1;
+            <tr>
+                <td>
+                    <img src="@item.Photo" height="50" width="50" />
+                </td>
+
+                <td>
+                    @displayIndex
+                </td>
+
+                <td>
+                    @item.FirstName
+                </td>
+
+                <td>
+                    @item.LastName
+                </td>
+
+                <td>
+                    <a href="/Client/CreateClient/@item.Id">Edit Client</a>
+                </td>
+
+                <td>
+                    <a href="Client/DeleteClient/@item.Id">Delete</a>
+                </td>
+
+                <td>
+                    <a href="Client/AutoClient/@item.Id">The list of cars</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
