@@ -1,9 +1,9 @@
 ﻿@model Models.ClientModel
 @{
-    ViewBag.Title = "Client Details";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Client Details</h2>
+<h2>Edit Client </h2>
 <form action="@Url.Action("UpdateClient", "Client")" enctype="multipart/form-data" method="POST" class="form-horizontal">
     
         @Html.AntiForgeryToken()

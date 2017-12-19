@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using Models;
 using Services;
+using System.Collections.Generic;
+
 
 namespace MyCarService.Controllers
 {
@@ -31,6 +33,27 @@ namespace MyCarService.Controllers
             });
 
             return View(clientsViewModel);
+        }
+
+        public ActionResult Index(string search)
+        {
+            
+            var clientsViewModel = new ClientViewModel();
+            List<Client> clients = clientService.GetAllClients(search);
+
+            ClientViewModel model = new ClientViewModel
+             clients.ForEach(client =>
+             {
+                 var clientModel = new ClientItemViewModel();
+                 clientModel.FirstName = client.FirstName;
+                 clientModel.LastName = client.LastName;
+                 clientModel.Id = client.Id;
+                 clientModel.Photo = String.IsNullOrWhiteSpace(client.Photo) ? null : "/Photo/" + client.Photo;
+
+                 clientsViewModel.Clients.Add(clientModel);
+             });
+
+            return View(model);
         }
 
         public ActionResult About()

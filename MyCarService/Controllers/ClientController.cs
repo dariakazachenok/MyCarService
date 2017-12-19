@@ -30,7 +30,7 @@ namespace MyCarService.Controllers
                 model.Address = client.Address;
                 model.Email = client.Email;
             }
-            return View("ClientDetails", model);
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -38,7 +38,7 @@ namespace MyCarService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("ClientDetails", model);
+                return View("Edit", model);
             };
 
             Client client = new Client();
@@ -114,6 +114,24 @@ namespace MyCarService.Controllers
             });
 
             return View("../Home/Index", clientsViewModel);
+        }
+        public ActionResult Details(int id)
+        {
+
+            var clients = clientService.GetAll();
+            var ClientDetailsViewModel = new ClientDetailsViewModel();
+
+            clients.ForEach(cl =>
+            {
+                var clientModel = new ClientItemViewModel();
+                clientModel.FirstName = cl.FirstName;
+                clientModel.LastName = cl.LastName;
+                clientModel.Id = cl.Id;
+                clientModel.Photo = String.IsNullOrWhiteSpace(cl.Photo) ? null : "/Photo/" + cl.Photo;
+
+                clientsViewModel.Clients.Add(clientModel);
+            });
+            return View(model);
         }
     }
 }

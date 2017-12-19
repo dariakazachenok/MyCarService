@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-    <form action="Index" method="get">
+    <form action="/Home" method="get">
         @Html.EditorFor(x => x.Search, new { htmlAttributes = new { placeholder = "Enter Last Name" } })
         <input type="submit" value="Search">
     </form>
@@ -26,6 +26,7 @@
             <th>№</th>
             <th>First name</th>
             <th>Last Name</th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -53,13 +54,17 @@
                 </td>
 
                 <td>
-                    <a href="/Client/CreateClient/@item.Id">Edit Client</a>
+                    <a href="/Client/CreateClient/@item.Id">Edit</a>
                 </td>
 
                 <td>
                     <a href="Client/DeleteClient/@item.Id">Delete</a>
                 </td>
-
+                
+                <td>
+                    <a href="Client/Details/@item.Id">Details</a>
+                
+                </td>
                 <td>
                     <a href="Client/AutoClient/@item.Id">The list of cars</a>
                 </td>
